@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>商务英语 7 天精进 · 全量版</title><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📘</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#f5f7fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--accent:#4f6df5;--al:#eef1ff;--green:#22c55e;--gl:#f0fdf4;--orange:#f59e0b;--ol:#fffbeb;--red:#ef4444;--border:#e5e7eb;--r:16px;--sh:0 2px 12px rgba(0,0,0,.06)}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Roboto,sans-serif;background:var(--bg);color:var(--text);padding-bottom:90px;overflow-x:hidden}
+.app{max-width:480px;margin:0 auto}
+.header{background:linear-gradient(135deg,#4f6df5,#7c3aed);color:#fff;padding:18px 16px 14px;position:sticky;top:0;z-index:100}
+.header h1{font-size:17px;font-weight:700}
+.header-sub{font-size:12px;opacity:.85;margin-top:2px}
+.mode-tabs{display:flex;background:var(--card);box-shadow:var(--sh);position:sticky;top:64px;z-index:99}
+.mode-tab{flex:1;padding:12px 4px;text-align:center;font-size:14px;font-weight:600;color:var(--sub);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s}
+.mode-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.mode{display:none;animation:fi .3s ease}
+.mode.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* 7-day */
+.day-tabs{display:flex;gap:6px;padding:10px 12px;overflow-x:auto;scrollbar-width:none}
+.day-tabs::-webkit-scrollbar{display:none}
+.day-tab{flex:0 0 auto;width:44px;height:52px;border-radius:12px;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;border:2px solid transparent;box-shadow:var(--sh)}
+.day-tab.active{border-color:var(--accent);background:var(--al)}
+.day-tab.done{background:var(--gl);border-color:var(--green)}
+.day-tab .num{font-size:16px;font-weight:700}
+.day-tab.active .num{color:var(--accent)}
+.day-tab.done .num{color:var(--green)}
+.day-tab .label{font-size:9px;color:var(--sub);margin-top:2px;max-width:40px;text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.dayc{display:none}
+.dayc.active{display:block}
+.day-header{padding:12px 16px 6px}
+.day-header h2{font-size:19px;font-weight:700}
+.day-header p{font-size:13px;color:var(--sub);margin-top:4px}
+.st{display:flex;align-items:center;gap:8px;padding:14px 16px 8px;font-size:15px;font-weight:600}
+.st .ic{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.ic-v{background:var(--al);color:var(--accent)}.ic-p{background:var(--ol);color:var(--orange)}.ic-x{background:var(--gl);color:var(--green)}
+.st .cnt{font-size:12px;color:var(--sub);font-weight:400;margin-left:auto}
+.fc{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);margin:0 16px 12px;perspective:600px;cursor:pointer}
+.fc-in{position:relative;width:100%;display:grid;transition:transform .5s;transform-style:preserve-3d}
+.fc.flipped .fc-in{transform:rotateY(180deg)}
+.fc-f,.fc-b{grid-area:1/1;position:relative;width:100%;min-height:96px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);padding:16px;display:flex;flex-direction:column;justify-content:center}
+.fc-b{background:var(--accent);color:#fff;transform:rotateY(180deg)}
+.fc-en{font-size:16px;font-weight:600;line-height:1.4;padding-right:38px;word-break:break-word}
+.fc-zh{font-size:13px;color:var(--sub);margin-top:6px;line-height:1.4;padding-right:38px}
+.fc-b .fc-zh{color:rgba(255,255,255,.85)}
+.fc-b .fc-en{color:#fff}
+.fc-ex{font-size:12px;margin-top:8px;line-height:1.5;color:rgba(255,255,255,.9);font-style:italic;padding-right:38px}
+.fc-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;background:var(--al);color:var(--accent);margin-top:8px;align-self:flex-start;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spk{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;background:var(--al);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--accent);z-index:10;flex-shrink:0}
+.fc.flipped .spk{background:rgba(255,255,255,.2);color:#fff}
+.spk:active{transform:scale(.85)}
+.pc{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);margin:0 16px 12px;padding:14px 16px;border-left:4px solid var(--accent)}
+.pc-en{font-size:15px;font-weight:600;line-height:1.5}
+.pc-zh{font-size:13px;color:var(--sub);margin-top:6px;line-height:1.5}
+.pc-note{font-size:12px;color:var(--orange);margin-top:8px;padding:6px 10px;background:var(--ol);border-radius:8px;line-height:1.4}
+.pc-act{margin-top:8px}
+.pc-act button{font-size:12px;padding:5px 14px;border-radius:20px;border:none;cursor:pointer;background:var(--al);color:var(--accent)}
+.qc{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);margin:0 16px 12px;padding:16px}
+.qc-q{font-size:14px;line-height:1.6;margin-bottom:12px}
+.qc-q .bl{display:inline-block;min-width:70px;border-bottom:2px solid var(--accent);text-align:center;font-weight:600;color:var(--accent);margin:0 2px}
+.qc-opts{display:flex;flex-direction:column;gap:8px}
+.qc-opt{padding:12px 14px;border:2px solid var(--border);border-radius:12px;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:8px}
+.qc-opt.ok{border-color:var(--green);background:var(--gl);color:var(--green)}
+.qc-opt.no{border-color:var(--red);background:#fef2f2;color:var(--red)}
+.qc-opt .ol2{width:24px;height:24px;border-radius:6px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
+.qc-opt.ok .ol2{background:var(--green);color:#fff}
+.qc-opt.no .ol2{background:var(--red);color:#fff}
+.qc-fb{margin-top:10px;padding:10px 12px;border-radius:8px;font-size:13px;line-height:1.5;display:none}
+.qc-fb.show{display:block}
+.fb-ok{background:var(--gl);color:var(--green)}
+.fb-no{background:#fef2f2;color:var(--red)}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.mi{padding:10px;border:2px solid var(--border);border-radius:10px;font-size:13px;text-align:center;cursor:pointer;line-height:1.3}
+.mi.sel{border-color:var(--accent);background:var(--al)}
+.mi.done{border-color:var(--green);background:var(--gl);opacity:.5;pointer-events:none}
+.mi.bad{border-color:var(--red);background:#fef2f2;animation:sk .3s}
+@keyframes sk{0%,100%{transform:none}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.done-sec{text-align:center;padding:22px 16px}
+.done-btn{background:var(--green);color:#fff;border:none;padding:13px 30px;border-radius:24px;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 4px 12px rgba(34,197,94,.3)}
+.done-btn.done{background:var(--card);color:var(--green);border:2px solid var(--green);box-shadow:none}
+.done-msg{font-size:13px;color:var(--sub);margin-top:10px}
+.hint{font-size:11px;color:var(--sub);text-align:center;padding:0 16px 12px}
+
+/* library */
+.lib-bar{padding:12px 16px 6px}
+.search{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:12px;font-size:14px;background:var(--card);outline:none}
+.search:focus{border-color:var(--accent)}
+.chips{display:flex;gap:6px;padding:10px 16px;overflow-x:auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;padding:6px 14px;border-radius:20px;font-size:12px;background:var(--card);border:2px solid var(--border);cursor:pointer;color:var(--sub);white-space:nowrap}
+.chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.lib-count{padding:4px 16px 10px;font-size:12px;color:var(--sub)}
+.lc{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);margin:0 16px 10px;perspective:600px;cursor:pointer}
+.lc-in{position:relative;width:100%;display:grid;transition:transform .45s;transform-style:preserve-3d}
+.lc.flipped .lc-in{transform:rotateY(180deg)}
+.lc-f,.lc-b{grid-area:1/1;position:relative;width:100%;min-height:60px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);padding:13px 14px;display:flex;flex-direction:column;justify-content:center}
+.lc-b{background:var(--accent);color:#fff;transform:rotateY(180deg)}
+.lc-zh{font-size:13px;line-height:1.5;color:var(--text);padding-right:6px;word-break:break-word}
+.lc-en{font-size:14px;font-weight:600;line-height:1.5;color:#fff;padding-right:38px;word-break:break-word}
+.lc-cat{position:absolute;top:8px;left:14px;font-size:10px;padding:2px 8px;border-radius:12px;background:var(--al);color:var(--accent);max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lc-f .lc-zh{margin-top:26px}
+.load-more{display:block;margin:8px auto 20px;padding:10px 28px;border-radius:20px;border:2px solid var(--accent);background:var(--card);color:var(--accent);font-size:13px;font-weight:600;cursor:pointer}
+.no-result{text-align:center;padding:40px 16px;color:var(--sub);font-size:14px}
+
+/* quiz */
+.quiz-wrap{padding:16px}
+.quiz-stats{display:flex;gap:10px;margin-bottom:14px}
+.qs{flex:1;background:var(--card);border-radius:12px;box-shadow:var(--sh);padding:12px;text-align:center}
+.qs .v{font-size:22px;font-weight:700;color:var(--accent)}
+.qs .l{font-size:11px;color:var(--sub);margin-top:2px}
+.qs.g .v{color:var(--green)}
+.qs.r .v{color:var(--red)}
+.quiz-card{background:var(--card);border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.08);min-height:240px;padding:44px 20px 40px;display:flex;flex-direction:column;justify-content:center;position:relative;cursor:pointer}
+.quiz-cat{position:absolute;top:14px;left:20px;font-size:11px;padding:3px 10px;border-radius:12px;background:var(--al);color:var(--accent);max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.quiz-front-text{font-size:16px;line-height:1.7;text-align:center;font-weight:500;word-break:break-word}
+.quiz-back-text{font-size:17px;line-height:1.7;text-align:center;font-weight:600;color:var(--accent);word-break:break-word;padding-right:44px}
+.quiz-tap{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:11px;color:var(--sub)}
+.quiz-audio{position:absolute;top:12px;right:14px;width:36px;height:36px;border-radius:50%;background:var(--al);border:none;font-size:16px;color:var(--accent);cursor:pointer;display:none}
+.quiz-btns{display:flex;gap:10px;margin-top:16px}
+.qb{flex:1;padding:14px;border-radius:14px;border:none;font-size:15px;font-weight:600;cursor:pointer;display:none}
+.qb.show{display:block}
+.qb-no{background:#fef2f2;color:var(--red)}
+.qb-ok{background:var(--gl);color:var(--green)}
+.quiz-cat-filter{padding:0 16px 12px}
+.quiz-cat-filter select{width:100%;padding:10px;border-radius:10px;border:2px solid var(--border);font-size:13px;background:var(--card);outline:none}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="header">
+  <h1>Business English · 全量学习版</h1>
+  <div class="header-sub">7 天核心课 + 116 条复习库 + 随机自测</div>
+</div>
+<div class="mode-tabs">
+  <div class="mode-tab active" onclick="switchMode(0,this)">7天核心课</div>
+  <div class="mode-tab" onclick="switchMode(1,this)">全量复习库</div>
+  <div class="mode-tab" onclick="switchMode(2,this)">随机自测</div>
+</div>
+
+<!-- MODE 1: 7-day course -->
+<div class="mode active" id="mode0">
+  <div class="day-tabs" id="dayTabs"></div>
+  <div id="dayContents"></div>
+</div>
+
+<!-- MODE 2: Library -->
+<div class="mode" id="mode1">
+  <div class="lib-bar"><input class="search" id="libSearch" placeholder="搜索中文或英文关键词…" oninput="renderLib(true)"></div>
+  <div class="chips" id="libChips"></div>
+  <div class="lib-count" id="libCount"></div>
+  <div id="libList"></div>
+  <button class="load-more" id="loadMore" onclick="loadMore()" style="display:none">加载更多</button>
+</div>
+
+<!-- MODE 3: Quiz -->
+<div class="mode" id="mode2">
+  <div class="quiz-wrap">
+    <div class="quiz-cat-filter">
+      <select id="quizCat" onchange="nextQuiz()">
+        <option value="">全部主题随机</option>
+      </select>
+    </div>
+    <div class="quiz-stats">
+      <div class="qs"><div class="v" id="qsTotal">0</div><div class="l">已测</div></div>
+      <div class="qs g"><div class="v" id="qsKnown">0</div><div class="l">记住了</div></div>
+      <div class="qs r"><div class="v" id="qsUnknown">0</div><div class="l">需复习</div></div>
+    </div>
+    <div class="quiz-card" id="quizCard" onclick="revealQuiz()">
+      <div class="quiz-cat" id="quizCatLabel"></div>
+      <div class="quiz-front-text" id="quizFront"></div>
+      <div class="quiz-back-text" id="quizBack" style="display:none"></div>
+      <button class="quiz-audio" id="quizAudio" onclick="event.stopPropagation();speak(quizCurrent.e)">&#128266;</button>
+      <div class="quiz-tap" id="quizTap">看中文 → 想英文 → 点击翻面</div>
+    </div>
+    <div class="quiz-btns">
+      <button class="qb qb-no" id="qbNo" onclick="markQuiz(false)">✗ 没记住</button>
+      <button class="qb qb-ok" id="qbOk" onclick="markQuiz(true)">✓ 记住了</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+/* ======= 7-DAY COURSE DATA (curated core) ======= */
+const COURSE = [
+  {
+    day: 1,
+    title: "Logistics & Shipping",
+    titleZh: "物流与运输",
+    desc: "货运代理、清关、提单等物流核心词汇与句式",
+    vocab: [
+      {en:"freight forwarder",zh:"货运代理",tag:"物流",example:"We are communicating with the freight forwarder."},
+      {en:"vessel",zh:"船只",tag:"物流",example:"The vessel has not departed yet."},
+      {en:"customs clearance",zh:"清关",tag:"物流",example:"EU import customs clearance will be processed there."},
+      {en:"bill of lading (B/L)",zh:"提单",tag:"单证",example:"The original bill of lading will be available within a week."},
+      {en:"consignee",zh:"收货人",tag:"单证",example:"Please confirm the consignee information."},
+      {en:"packing list",zh:"装箱单",tag:"单证",example:"The packing list is for estimation only."},
+      {en:"non-stackable",zh:"不可堆叠",tag:"物流",example:"All items are non-stackable."},
+      {en:"tail lift",zh:"尾部升降板",tag:"物流",example:"Does the truck have a tail lift?"},
+      {en:"DDP (Delivered Duty Paid)",zh:"完税后交货",tag:"贸易术语",example:"The packages were shipped under DDP terms."},
+      {en:"DAP (Delivered at Place)",zh:"目的地交货",tag:"贸易术语",example:"Transport costs are quoted as DAP."},
+      {en:"gross weight / net weight",zh:"毛重 / 净重",tag:"物流",example:"Please declare both gross weight and net weight."},
+      {en:"lead time",zh:"交货周期",tag:"物流",example:"The lead time is approximately three weeks."}
+    ],
+    patterns: [
+      {en:"Due to congestion at the Port of Shanghai, the vessel has not departed yet.",zh:"由于上海港拥堵，船现在还没出发。",note:"Due to + 原因 + 结果，商务邮件常用句式"},
+      {en:"We are communicating with the freight forwarder, but we still do not have a clear response.",zh:"我们在和货运代理沟通，但还没有明确的答复。",note:"but 转折，说明进展和困难并存"},
+      {en:"The packing list is for estimation only and shall not be used as the actual weight.",zh:"箱单仅为预估，不能用作实际重量。",note:"for...only 限定用途，shall not be 正式禁止"},
+      {en:"They said they haven't booked the container yet.",zh:"他们说还没订舱。",note:"book the container = 订舱，物流常用表达"},
+      {en:"We will arrange shipment by the quickest possible vessel.",zh:"我们会安排最快的船发货。",note:"by the quickest possible + 名词，强调最快"}
+    ],
+    practice: {
+      type:"fill",
+      q:"___ congestion at the port, the vessel has not departed ___.",
+      blank1:"Due to",blank2:"yet",
+      options:["Due to / yet","Because / still","As / already","With / now"],
+      answer:0,
+      explain:"'Due to' 表原因，放在句首；'yet' 用于否定句，表示'还没'。"
+    }
+  },
+  {
+    day: 2,
+    title: "Payment & Finance",
+    titleZh: "付款与财务",
+    desc: "信用证、电汇、预付款等财务核心词汇与句式",
+    vocab: [
+      {en:"Letter of Credit (L/C)",zh:"信用证",tag:"付款",example:"We only accept sight letters of credit."},
+      {en:"irrevocable sight LC",zh:"不可撤销即期信用证",tag:"付款",example:"They need to use an irrevocable sight letter of credit."},
+      {en:"T/T (Wire Transfer)",zh:"电汇",tag:"付款",example:"The down payment must be made by T/T."},
+      {en:"advance payment",zh:"预付款",tag:"付款",example:"We can discuss the advance payment ratio."},
+      {en:"down payment",zh:"首付款",tag:"付款",example:"50% down payment, 50% before shipment."},
+      {en:"balance",zh:"尾款",tag:"付款",example:"The remaining balance settled by L/C."},
+      {en:"remittance",zh:"汇款",tag:"财务",example:"We have processed the remittance reversal."},
+      {en:"refund",zh:"退款",tag:"财务",example:"Please check if you have received the refund."},
+      {en:"invoice",zh:"发票",tag:"财务",example:"Please find the invoice attached."},
+      {en:"SWIFT/BIC code",zh:"银行识别码",tag:"银行",example:"Please use the SWIFT code for international transfers."},
+      {en:"EORI number",zh:"欧盟经济运营者注册号",tag:"海关",example:"Could you provide your EORI number?"},
+      {en:"ROI (Return on Investment)",zh:"投资回报率",tag:"财务",example:"Due to ROI considerations, we discontinued the business."}
+    ],
+    patterns: [
+      {en:"We require full payment before shipment.",zh:"发货前我们需要收到全款。",note:"require + 名词，简洁有力的付款要求"},
+      {en:"We only accept sight letters of credit and do not accept usance letters of credit.",zh:"我们只接受即期信用证，不接受远期信用证。",note:"only accept... do not accept... 对比结构"},
+      {en:"The refund will be processed back to the original payment account.",zh:"退款将原路退回原付款账户。",note:"be processed back to 被动语态，正式财务表达"},
+      {en:"Due to audit requirements, we can only accept payments from the buyer's company account.",zh:"因审计要求，我们只能接收合同上买家公司账户的付款。",note:"Due to + 原因，正式商务理由说明"},
+      {en:"For the remaining 20%, we can offer a discount equivalent to three months of interest.",zh:"对于剩余的20%，我们可以提供相当于三个月利息的折扣。",note:"equivalent to 等价于，financial context"}
+    ],
+    practice: {
+      type:"fill",
+      q:"We only accept ___ letters of credit and do not accept ___ letters of credit.",
+      blank1:"sight",blank2:"usance",
+      options:["sight / usance","cash / credit","bank / wire","open / closed"],
+      answer:0,
+      explain:"sight LC = 即期信用证（见单即付），usance LC = 远期信用证（延期付款）。"
+    }
+  },
+  {
+    day: 3,
+    title: "Project Management",
+    titleZh: "项目管理与进度",
+    desc: "时间表、里程碑、实施调试等项目管理核心词汇",
+    vocab: [
+      {en:"timeline",zh:"时间表",tag:"项目",example:"I will update the timeline."},
+      {en:"milestone",zh:"里程碑",tag:"项目",example:"We need to meet the new milestones."},
+      {en:"implementation",zh:"实施",tag:"项目",example:"Implementation, commissioning & training."},
+      {en:"commissioning",zh:"调试/投运",tag:"技术",example:"Commissioning of the whole project."},
+      {en:"deployment",zh:"部署",tag:"技术",example:"We can start production and deployment ahead of schedule."},
+      {en:"go-live",zh:"上线",tag:"项目",example:"The go-live date is scheduled for next month."},
+      {en:"POC (Proof of Concept)",zh:"概念验证",tag:"项目",example:"We need to do a POC testing first."},
+      {en:"benchmark project",zh:"标杆项目",tag:"商务",example:"We need this benchmark project."},
+      {en:"on-site support",zh:"现场支持",tag:"服务",example:"Standard on-site support fee is €1,000 per day."},
+      {en:"escalate",zh:"升级/上报",tag:"管理",example:"We escalated the project to VP and CEO level."},
+      {en:"follow-up matters",zh:"善后事宜",tag:"管理",example:"There are some follow-up matters to resolve."},
+      {en:"consensus",zh:"共识",tag:"商务",example:"You've reached a consensus on stocking."}
+    ],
+    patterns: [
+      {en:"We will keep you updated on this matter.",zh:"我们会持续同步此事的进展。",note:"keep someone updated on 持续更新，商务高频句"},
+      {en:"We are fully committed to delivering quality results within the updated timeline.",zh:"我们全力在更新后的时间表内交付高质量成果。",note:"be fully committed to 全力以赴，within the timeline"},
+      {en:"Please rest assured that this change does not affect our commitment to you.",zh:"请放心，此变动不影响我们对您的承诺。",note:"rest assured 放心，does not affect 否定影响"},
+      {en:"I will circle back to you with a concrete action plan.",zh:"我会带着具体的行动计划回头跟进你。",note:"circle back = 回头跟进，concrete action plan"},
+      {en:"Please bear with us a little longer — we want to do our best to make this project a success.",zh:"请再多给我们一点时间，我们想努力把项目做到最好。",note:"bear with someone 请多包涵/忍耐，高频口语表达"}
+    ],
+    practice: {
+      type:"fill",
+      q:"I will ___ back to you with a ___ action plan.",
+      blank1:"circle",blank2:"concrete",
+      options:["circle / concrete","come / clear","go / complete","reach / certain"],
+      answer:0,
+      explain:"circle back = 回头跟进（美式商务高频词），concrete = 具体的/实质性的。"
+    }
+  },
+  {
+    day: 4,
+    title: "Technical & Product",
+    titleZh: "技术与产品规格",
+    desc: "底盘、激光雷达、传感器等技术翻译核心词汇",
+    vocab: [
+      {en:"chassis",zh:"底盘",tag:"机械",example:"The robot should be only a chassis or a lifting robot."},
+      {en:"lifting mechanism",zh:"举升结构",tag:"机械",example:"Completely abandon the original lifting mechanism."},
+      {en:"LiDAR",zh:"激光雷达",tag:"传感器",example:"If we switch to a 3D LiDAR, we need to replace the mounting bracket."},
+      {en:"wiring harness",zh:"线束",tag:"电气",example:"Changing the wiring harness would require disassembling the forklift."},
+      {en:"calibration",zh:"标定/校准",tag:"技术",example:"Perform recalibration before the device can be used."},
+      {en:"repeatability positioning accuracy",zh:"重复定位精度",tag:"技术参数",example:"Navigation position accuracy: ±10 mm."},
+      {en:"payload",zh:"负载",tag:"技术参数",example:"Rated load capacity: 1500 kg."},
+      {en:"assembly",zh:"总成",tag:"机械",example:"A direct assembly replacement is recommended."},
+      {en:"SLAM",zh:"即时定位与地图构建",tag:"导航",example:"Navigation type: Laser SLAM."},
+      {en:"fork side-shift function",zh:"货叉平移功能",tag:"叉车",example:"The forklift has a fork side-shift function."},
+      {en:"counterbalance forklift",zh:"平衡重叉车",tag:"叉车",example:"The counterbalance forklift was packed by the freight forwarder."},
+      {en:"gearbox",zh:"减速机/齿轮箱",tag:"机械",example:"Gearboxes are in short supply."}
+    ],
+    patterns: [
+      {en:"Technically speaking, we don't want the robots to handle location management.",zh:"技术上讲，我们不希望机器人做库位管理。",note:"Technically speaking 技术上来说，引出技术观点"},
+      {en:"We are able to detach the upper laser module to lower the overall height.",zh:"我们可以拆下顶部激光模块来降低整体高度。",note:"be able to detach 拆卸，lower the height 降低高度"},
+      {en:"The diameter of the casters is 60mm, which is the reason for restricting the gap to ≤30mm.",zh:"万向轮直径60mm，这是限制间隙≤30mm的原因。",note:"which is the reason for 限制原因说明"},
+      {en:"Changing it would require disassembling the forklift — a procedure we are currently unable to perform in Europe.",zh:"更换线束需要拆开叉车，我们在欧洲暂时做不到。",note:"would require 需要，currently unable to 暂时无法"},
+      {en:"This can only operate in narrow aisles.",zh:"这个只能在窄巷道里运行。",note:"can only operate 只能运行，narrow aisles 窄巷道"}
+    ],
+    practice: {
+      type:"fill",
+      q:"___ speaking, we don't want the robots to ___ location management.",
+      blank1:"Technically",blank2:"handle",
+      options:["Technically / handle","Honestly / do","Generally / make","Simply / take"],
+      answer:0,
+      explain:"Technically speaking = 技术上讲；handle = 处理/负责。两者都是技术商务沟通高频词。"
+    }
+  },
+  {
+    day: 5,
+    title: "Contract & Negotiation",
+    titleZh: "合同与谈判",
+    desc: "框架协议、报价、折扣、投标等谈判核心词汇",
+    vocab: [
+      {en:"framework agreement",zh:"框架协议",tag:"合同",example:"Elevate this to a general framework agreement."},
+      {en:"quotation",zh:"报价单",tag:"商务",example:"Please find our quotation for your review."},
+      {en:"discount",zh:"折扣",tag:"商务",example:"We would like to offer a 20% discount."},
+      {en:"bid / bidding",zh:"投标",tag:"商务",example:"The contract was awarded to the lowest bidder."},
+      {en:"Incoterms",zh:"国际贸易术语",tag:"贸易",example:"Incoterms clarify the division of responsibilities."},
+      {en:"warranty",zh:"质保",tag:"合同",example:"Warranty: 12 months or 2000 hours."},
+      {en:"terms and conditions",zh:"条款与条件",tag:"合同",example:"Please review the terms and conditions."},
+      {en:"compliance",zh:"合规",tag:"法律",example:"All payments must be processed in full compliance."},
+      {en:"confidential",zh:"保密",tag:"合同",example:"The price must remain strictly confidential."},
+      {en:"competitor",zh:"竞争对手",tag:"商务",example:"We're not looking to compete directly with other brands."},
+      {en:"concession",zh:"让步",tag:"谈判",example:"We were prepared to make further concessions."},
+      {en:"award notification",zh:"中标通知",tag:"商务",example:"We are delighted to inform you of the award notification."}
+    ],
+    patterns: [
+      {en:"Put yourself in my manager's shoes — other salespeople get discounts of $1,000 per unit.",zh:"换位思考一下我领导——其他销售每台降1000美金。",note:"put yourself in someone's shoes 换位思考，谈判高频表达"},
+      {en:"From my side, the contract is acceptable. However, I'm still waiting for feedback from my colleagues.",zh:"我这边合同可以接受。但我同事还没反馈。",note:"From my side 从我这边来看，however 转折"},
+      {en:"We can offer a discount equivalent to three months of interest.",zh:"我们可以提供相当于三个月利息的折扣。",note:"equivalent to 等价于，financial negotiation"},
+      {en:"The price must remain strictly confidential. We cannot offer this discount to every integrator.",zh:"价格必须严格保密，我们不能给每个集成商这个折扣。",note:"strictly confidential 严格保密，cannot offer 不能给"},
+      {en:"We respectfully suggest reopening the bidding to ensure a fair and competitive outcome.",zh:"我们建议重新投标以确保公平竞争的结果。",note:"respectfully suggest 委婉建议，ensure 确保"}
+    ],
+    practice: {
+      type:"match",
+      pairs:[
+        {en:"framework agreement",zh:"框架协议"},
+        {en:"concession",zh:"让步"},
+        {en:"confidential",zh:"保密"},
+        {en:"compliance",zh:"合规"}
+      ]
+    }
+  },
+  {
+    day: 6,
+    title: "Daily Business Expressions",
+    titleZh: "日常商务表达",
+    desc: "会议改期、休假通知、社交表达等日常沟通",
+    vocab: [
+      {en:"reschedule",zh:"重新安排/改期",tag:"会议",example:"Could we reschedule it to Tuesday?"},
+      {en:"on leave",zh:"休假",tag:"人事",example:"He is on leave today and will be back next Monday."},
+      {en:"jet lag",zh:"时差",tag:"日常",example:"I was jet-lagged and hadn't rested well."},
+      {en:"just in case",zh:"以防万一",tag:"日常",example:"Take an umbrella, just in case."},
+      {en:"ahead of schedule",zh:"提前",tag:"项目",example:"We can start production ahead of schedule."},
+      {en:"bear with someone",zh:"请多包涵/忍耐",tag:"礼貌",example:"Please bear with me on this matter."},
+      {en:"step back / withdraw",zh:"退出",tag:"商务",example:"I will have to step back from this."},
+      {en:"pressing someone",zh:"催促某人",tag:"日常",example:"They're pressing me for it."},
+      {en:"exceed expectations",zh:"超出预期",tag:"日常",example:"It's a bit beyond my expectations."},
+      {en:"out of office",zh:"不在办公室",tag:"邮件",example:"I am currently on leave with limited access to emails."},
+      {en:"at your earliest convenience",zh:"尽早",tag:"礼貌",example:"Please proceed at your earliest convenience."},
+      {en:"I appreciate your understanding",zh:"感谢你的理解",tag:"礼貌",example:"I appreciate your understanding in this matter."}
+    ],
+    patterns: [
+      {en:"I hope this email finds you well.",zh:"希望这封邮件找到你时一切安好。",note:"商务邮件最经典开场白，几乎所有正式邮件必备"},
+      {en:"Could we reschedule it to Tuesday from 10:00 to 11:00 AM CET?",zh:"我们可以把会议改到周二上午10点到11点CET时间吗？",note:"Could we reschedule... to 委婉改期请求"},
+      {en:"I'll keep you updated as things progress.",zh:"我会随进展持续同步你。",note:"keep someone updated as things progress"},
+      {en:"Since our China office is off duty, I'm considering paying this deposit myself.",zh:"因为中国公司下班了，我在考虑自己付这个押金。",note:"off duty 下班，consider doing 考虑做某事"},
+      {en:"You can rest assured that I will be in touch once we have an update.",zh:"请放心，一有更新我会马上联系你。",note:"rest assured 放心，be in touch 联系"}
+    ],
+    practice: {
+      type:"fill",
+      q:"I ___ this email finds you ___.",
+      blank1:"hope",blank2:"well",
+      options:["hope / well","wish / good","think / fine","expect / ok"],
+      answer:0,
+      explain:"I hope this email finds you well. 是商务邮件最经典的开场白，几乎每天都会用到。"
+    }
+  },
+  {
+    day: 7,
+    title: "Email Templates & Review",
+    titleZh: "邮件模板与综合复习",
+    desc: "自动回复、延期通知、节日祝福等高频邮件模板",
+    vocab: [
+      {en:"subject line",zh:"邮件主题",tag:"邮件",example:"Subject: Out of Office — Spring Festival Holiday"},
+      {en:"best regards",zh:"此致敬礼",tag:"邮件",example:"Best regards, [Your Name]"},
+      {en:"please find attached",zh:"请查收附件",tag:"邮件",example:"Please find the invoice attached."},
+      {en:"looking forward to",zh:"期待",tag:"邮件",example:"Looking forward to your positive response."},
+      {en:"do not hesitate to",zh:"请随时/不要犹豫",tag:"邮件",example:"Please do not hesitate to contact us."},
+      {en:"on behalf of",zh:"代表",tag:"邮件",example:"On behalf of everyone at our company..."},
+      {en:"sincerely apologize",zh:"真诚道歉",tag:"邮件",example:"We sincerely apologize for the inconvenience."},
+      {en:"at your convenience",zh:"在您方便时",tag:"礼貌",example:"Please let us know at your convenience."},
+      {en:"warmest wishes",zh:"最温暖的祝福",tag:"社交",example:"Warmest holiday wishes from our team!"},
+      {en:"Wishing you a prosperous New Year",zh:"祝您新年繁荣兴旺",tag:"节日",example:"Wishing you a prosperous and successful year ahead!"},
+      {en:"kindly arrange",zh:"请安排",tag:"邮件",example:"Kindly arrange the payment again as soon as possible."},
+      {en:"subject to",zh:"以...为准/受限于",tag:"正式",example:"Subject to our final confirmation."}
+    ],
+    patterns: [
+      {en:"Subject: Out of Office — Spring Festival Holiday. I will resume work on February 24th.",zh:"主题：春节休假不在办公室。我将于2月24日恢复工作。",note:"自动回复邮件标准格式，Subject + 关键信息"},
+      {en:"Thank you for your email. I sincerely apologize for any inconvenience caused by this delay.",zh:"感谢您的邮件。对此次延误造成的不便，我们真诚道歉。",note:"Thank you for + 道歉，处理投诉的标准开场"},
+      {en:"We are delighted to inform you that our company has been awarded the project.",zh:"我们很高兴地通知您，我们公司已中标该项目。",note:"be delighted to inform 高兴通知，be awarded 中标"},
+      {en:"As the holiday season approaches, we would like to extend our warmest wishes to you.",zh:"节日将至，我们向您致以最温暖的祝福。",note:"As... approaches 随着...临近，extend wishes 致以祝福"},
+      {en:"Please do not hesitate to reach out should you have any questions.",zh:"如有任何问题，请随时联系我们。",note:"do not hesitate to 经典结尾句，should = if 的正式用法"}
+    ],
+    practice: {
+      type:"fill",
+      q:"Please do not ___ to reach out ___ you have any questions.",
+      blank1:"hesitate",blank2:"should",
+      options:["hesitate / should","wait / if","stop / when","delay / as"],
+      answer:0,
+      explain:"do not hesitate to = 不要犹豫去...；should you = if you 的正式倒装用法，商务邮件高频结尾句。"
+    }
+  }
+];
+
+/* ======= FULL LIBRARY ======= */
+const LIB = [{"z":"因为上海港拥堵，船现在还没出发，我们在和货运代理沟通，但是现在还没有明确的答复。","e":"Due to congestion at the Port of Shanghai, the vessel has not departed yet. We are communicating with the freight forwarder, but we still do not have a clear response so far.","c":"物流运输","t":"paragraph"},{"z":"我们已经操作退汇，请检查你们是否收到退款。附件是我们的发票，请尽快安排再次付款，请注意，付款至我们的如下美金账号。谢谢。","e":"We have processed the remittance reversal. Please check if you have received the refund. Attached is our invoice. Kindly arrange the payment again as soon as possible. Please note that the payment should be made to our USD account as follows. Thank you.","c":"付款财务","t":"paragraph"},{"z":"我们已经操作退款，请检查你们是否收到退款。附件是我们的发票，请尽快安排再次付款，请注意，付款至我们的如下美金账号。谢谢。","e":"We have processed the refund. Please check if you have received it. Attached is our invoice. Kindly arrange the payment again as soon as possible. Please note that the payment should be made to our USD account as follows. Thank you.","c":"付款财务","t":"paragraph"},{"z":"技术上讲，我们不希望机器人做库位管理的事情，这会引发很多不必要的问题。","e":"Technically speaking, we don't want the robots to handle location management, as that would cause many unnecessary issues.","c":"技术产品","t":"sentence"},{"z":"但是他们没有复现这个问题。","e":"But they did not reproduce this issue.","c":"综合表达","t":"sentence"},{"z":"让我先解释一下现在的情况。你们付的美金到了我们的欧元账户，所以这笔付款在银行是挂起的状态。所以你们银行那边并不会收到我们银行的任何通知。","e":"Let me explain the current situation. Your USD payment has been received into our EUR account, so it is currently being held by the bank. As a result, your bank will not receive any notification from ours.","c":"付款财务","t":"paragraph"},{"z":"二是银行把这笔付款退回，然后你们再重新付款到我们正确的美金账户。","e":"The bank returns the payment, and you make a new transfer to the correct USD account.","c":"付款财务","t":"sentence"},{"z":"我们认为第一种方式更简单一点，所以发邮件希望能这样操作，谢谢！","e":"We believe the first option is simpler, so we are reaching out via email in hopes that this can be arranged. Thank you!","c":"邮件社交","t":"sentence"},{"z":"草坪面积、坡度、预算。","e":"Lawn area, slope, and budget.","c":"综合表达","t":"phrase"},{"z":"我们内部规定，必须遵循非标询价流程。","e":"Our internal regulations require that the non-standard inquiry process must be followed.","c":"付款财务","t":"sentence"},{"z":"机器人底盘","e":"Robot chassis","c":"技术产品","t":"phrase"},{"z":"3 年零利率","e":"3-year zero interest rate","c":"综合表达","t":"phrase"},{"z":"车里太热了，本来那个礼品的袋子是好的，我一提，断了。应该是高温把袋子的连接胶给热化了。","e":"It's too hot in the car. The gift bag was fine originally, but when I picked it up, the handle broke off. The high temperature must have melted the glue that held it together.","c":"综合表达","t":"paragraph"},{"z":"车里太热了，本来那个礼品的带子是好的，我一提，断了。应该是高温把袋子的连接胶给热化了。","e":"It's way too hot inside the car. The strap on the gift bag was perfectly fine at first, but as soon as I lifted it, it snapped. I guess the heat softened and melted the glue holding it together.","c":"综合表达","t":"paragraph"},{"z":"对电池来说，同时大功率充电和放电，会有危险。","e":"For a battery, simultaneous high-power charging and discharging can be dangerous.","c":"技术产品","t":"sentence"},{"z":"到现在为止，我们的付款政策对所有客户都是统一的、一致的，就是发货前我们必须要收到全款。","e":"To date, our payment policy has been uniform and consistent for all customers: we require full payment before shipment.","c":"物流运输","t":"sentence"},{"z":"每一笔款项的处理都必须合规。","e":"Every payment must be handled in compliance with regulations.","c":"付款财务","t":"sentence"},{"z":"这不是我的坚持，这个就是单独售卖的，只有一台Handle，我们很难提供更多折扣。","e":"This is not my insistence; this item is sold separately. With only one Handle available, it's difficult for us to offer any further discount.","c":"合同谈判","t":"sentence"},{"z":"当更换举升结构时，需要将机器人全部拆散，把底板拆出来打孔，并重新安装所有的部件，接线，并调试。","e":"When replacing the lifting structure, it is necessary to completely disassemble the robot, remove the base plate for drilling, and then reinstall all components, reconnect the wiring, and perform debugging.","c":"技术产品","t":"sentence"},{"z":"我们会定最快的船并且尽可能的压缩现场实施的时间。","e":"We will book the fastest available vessel and minimize the on-site installation time as much as possible.","c":"物流运输","t":"sentence"},{"z":"上一次也是他去你们那培训的。","e":"The last time, he also went to your place for training.","c":"项目管理","t":"sentence"},{"z":"同时，这已经不是这个司机第一次发生这样的事情了，我们深表歉意，但是请联系运输公司处理。","e":"Additionally, this is not the first time this driver has caused such issues. We sincerely apologize, but please contact the transportation company to handle this matter.","c":"物流运输","t":"sentence"},{"z":"现在我们没有立即能用的解决方案，所以要根据选型来看是否能设计转接板，用来安装这个模块。","e":"Currently, we do not have an immediately available solution, so we need to evaluate based on the selection to see if an adapter board can be designed to install this module.","c":"技术产品","t":"paragraph"},{"z":"我每天晚上去健身房。","e":"I go to the gym every evening.","c":"日常表达","t":"sentence"},{"z":"这家健身中心 24 小时营业。","e":"This fitness center is open 24 hours.","c":"日常表达","t":"sentence"},{"z":"下一批已经卖光了。","e":"The next batch is already sold out.","c":"综合表达","t":"sentence"},{"z":"我们可以讨论预付款的比例，但是提货前我们需要收到全款。","e":"We can discuss the advance payment ratio, but we require full payment before the goods are picked up.","c":"物流运输","t":"sentence"},{"z":"我希望我们可以先这样运行，后续合作一段时间后再讨论更改。","e":"I hope we can proceed in this manner for now, and discuss any adjustments after cooperating for a period of time.","c":"会议日程","t":"sentence"},{"z":"德语区","e":"German-speaking region","c":"综合表达","t":"phrase"},{"z":"你把线束的插头拍给我一下。","e":"Take a picture of the wire harness connector for me.","c":"技术产品","t":"sentence"},{"z":"他们让我不要把关系搞砸了。","e":"They told me not to ruin the relationship.","c":"物流运输","t":"sentence"},{"z":"我是钛金会员，我在办入住的时候，礼遇选了早餐，请你跟前台确认一下。","e":"I'm a Titanium member. When I checked in, I selected breakfast as my benefit. Please confirm this with the front desk.","c":"日常表达","t":"sentence"},{"z":"你可以和你的集成商客户谈佣金方案。","e":"You can discuss the commission plan with your integrator client.","c":"项目管理","t":"sentence"},{"z":"今天收到总部的消息，因评估投资回报率，控制器后续将不再面向欧洲市场的新客户提供。","e":"I got bad news from our headquarters today. Due to the ROI, we will not provide the controller in the European market to new customers any more.","c":"付款财务","t":"sentence"},{"z":"你们计算投资回报率是按照销售叉车的利润来计算的吗？还是计算这台叉车在你们工厂应用的投资回报率？","e":"Do you calculate the ROI based on the profit from selling the forklifts, or do you calculate the ROI of applying this forklift in your factory?","c":"技术产品","t":"sentence"},{"z":"我们正在搬仓库。","e":"We are in the process of relocating the warehouse.","c":"物流运输","t":"sentence"},{"z":"房间里味道太大了。","e":"The smell in the room is too strong.","c":"日常表达","t":"sentence"},{"z":"这个协议的主要作用是确认我们双方的合作关系，你可以在市场上使用我们的品牌，我们提供产品折扣和更好的支持。只是一种合作确认，不需要你们购买什么。你们已经有了我们的产品。","e":"The main purpose of this agreement is to confirm the cooperative relationship between both parties. You may use our brand in the market, and we will provide product discounts and better support. It is merely a confirmation of cooperation and does not require you to purchase anything. You already have our products.","c":"物流运输","t":"paragraph"},{"z":"下下个周一。","e":"Monday after next.","c":"会议日程","t":"phrase"},{"z":"他们对我们的产品非常了解，也非常专业。","e":"They have a very thorough understanding of our products and are highly professional.","c":"邮件社交","t":"sentence"},{"z":"我们的插座晚上是有电的吗？","e":"Is there power in our outlets in the evening?","c":"综合表达","t":"sentence"},{"z":"这个箱子不是全部，是一个底面、一个侧面和一个背板连在一起。","e":"This box is not a complete whole; it consists of a base, a side, and a back panel connected as one piece.","c":"综合表达","t":"sentence"},{"z":"德国本来不放假，因为德国办公室都是中国人，他们也都请假了。","e":"Germany originally had no holiday, but since the offices in Germany are all staffed by Chinese employees, they all took leave.","c":"邮件社交","t":"sentence"},{"z":"我们没有宠物。","e":"We don't have any pets.","c":"综合表达","t":"phrase"},{"z":"这个缠绕膜很厚。","e":"This stretch film is very thick.","c":"综合表达","t":"phrase"},{"z":"祝您生意兴隆，蒸蒸日上！","e":"Wishing you a very prosperous and successful year ahead!","c":"邮件社交","t":"sentence"},{"z":"祝您生意长虹，财源广进！","e":"May your business have a thriving and prosperous year!","c":"邮件社交","t":"sentence"},{"z":"谨祝贵公司宏图大展，骏业日新！","e":"Wishing you a booming year ahead!","c":"邮件社交","t":"phrase"},{"z":"祝您今年生意红红火火，大发利市！","e":"All the best for a successful year!","c":"邮件社交","t":"sentence"},{"z":"我就超额完成任务了。","e":"I've already exceeded the target.","c":"综合表达","t":"phrase"},{"z":"你们订的货车带尾部升降板吗？","e":"Does the truck you booked have a tail lift?","c":"物流运输","t":"sentence"},{"z":"因为我们中国公司下班了，所以我在考虑我自己支付这个押金。","e":"Since our China office is off duty, I'm considering paying this deposit myself.","c":"付款财务","t":"sentence"},{"z":"关于信用证付款，我们只接受尾款是用信用证，首付款必须是电汇。信用证只接受即时到账信用证，不接受账期。我们需要在提交给银行必须的资料后，能够立即到款的那种。","e":"Regarding payment by letter of credit, we only accept using an LC for the final payment, while the down payment must be made by wire transfer. For the letter of credit, we only accept sight letters of credit and do not accept usance letters of credit. The type we require must allow immediate payment upon submission of the necessary documents to the bank.","c":"付款财务","t":"paragraph"},{"z":"电气原理图","e":"Electrical Schematic Diagram","c":"综合表达","t":"phrase"},{"z":"货叉平移功能","e":"Fork Side-Shift Function","c":"物流运输","t":"phrase"},{"z":"您的同事在波恩的会面看来富有成果，我们也很高兴得知贵方对我们的产品和技术演示表示满意。建议您可以先与内部团队进一步沟通，以便我们共同探讨后续的合作步骤。","e":"My colleagues informed me that their meeting with your team in Bonn was quite productive. They shared our technical expertise and conducted several demos, and it appears your side is satisfied with our offerings.","c":"合同谈判","t":"paragraph"},{"z":"设计优化","e":"Design Optimization","c":"综合表达","t":"phrase"},{"z":"提单","e":"Bill of Lading","c":"物流运输","t":"phrase"},{"z":"他们是非常专业的团队，对我们的产品非常了解，我希望你们可以有一个很好的合作。","e":"They are a highly professional team with a deep understanding of our products. I hope you can have a very good collaboration.","c":"邮件社交","t":"sentence"},{"z":"我想我可以把他们介绍给你们，这样可以给你们提供更好的服务，你觉得呢？","e":"I think I can introduce them to you, which could lead to better service for you. What do you think?","c":"综合表达","t":"sentence"},{"z":"这样我遇到类似的需求我会关注。","e":"I'll take note of that for future similar needs.","c":"综合表达","t":"sentence"},{"z":"这会影响一些你们叉车的交期。","e":"This may affect the delivery schedule for some of your forklifts.","c":"物流运输","t":"sentence"},{"z":"我的一个比利时客户这么做过，但是他后悔了，可是我没法帮他。","e":"One of my Belgian clients did the same, but he regretted it. Unfortunately, I couldn’t help him.","c":"综合表达","t":"sentence"},{"z":"在中国更有可能。","e":"More likely in China.","c":"综合表达","t":"phrase"},{"z":"我们在系统上进行竞价，最后最低价中标。","e":"We conducted the bidding on the system, and the contract was awarded to the lowest bidder in the end.","c":"付款财务","t":"sentence"},{"z":"年底了，我需要再努力一把，所以对这个比较着急。","e":"The year is ending, and I need to push myself a little harder, which is why I'm feeling quite anxious about this.","c":"付款财务","t":"sentence"},{"z":"竞争一定很激烈。","e":"The competition must have been very intense.","c":"综合表达","t":"sentence"},{"z":"因为我们想在月底前把货发出去，这样就能在2025年确认收入，希望能得你们能尽快安排货运，非常感谢。","e":"We hope to ship the goods before the end of this month so that the revenue can be recorded in 2025.","c":"物流运输","t":"sentence"},{"z":"因为审计要求，我们只能接收合同上的买家公司账户的付款。你们可以让客户付款给你们，然后你们一起付款给我们。","e":"Due to audit requirements, we can only accept payments from the buyer’s company account specified in the contract. Your client can make the payment to you first, and then you can combine and transfer the total amount to us.","c":"付款财务","t":"paragraph"},{"z":"上海到鹿特丹到葡萄牙","e":"Shanghai to Rotterdam to Portugal","c":"物流运输","t":"phrase"},{"z":"我们负责海外发货的同事休产假了，我们新招了一个同事，所以会比较慢。","e":"Our colleague responsible for overseas shipping is on maternity leave, and we've hired a new colleague, so things may be a bit slower.","c":"物流运输","t":"sentence"},{"z":"因为您的合同是跟我们中国公司签署的，根据审计要求，我们需要从中国发货并且以您的名义在欧洲报关进口，所以货物还是要发到你们那里。如果你们想直接用德国公司的机器人，是可以的，因为也是全新产品。可以在另一台机器人到货后转发回到德国。","e":"Since your contract is signed with our Chinese company, audit requirements stipulate that we must ship the goods from China and handle customs clearance in Europe under your company’s name. Therefore, the goods still need to be delivered to your location. If you prefer to use the robot from the German company directly, that is possible as it is also a brand-new product. After the other robot arrives, it can be forwarded back to Germany.","c":"物流运输","t":"paragraph"},{"z":"你付了第一笔款了吗？","e":"Have you made the first payment?","c":"付款财务","t":"phrase"},{"z":"我同事说货代并没有按原定于23号的船期发运机器人，我们正在和货代沟通，确保可以在下周一的下一班船发运，通常发运一周内会有正式的提单。","e":"My colleague said the freight forwarder did not ship the robots on the originally scheduled vessel date of the 23rd. We are currently communicating with the freight forwarder to ensure the shipment can be made on the next vessel this coming Monday. Typically, the original bill of lading will be available within a week after shipment.","c":"物流运输","t":"paragraph"},{"z":"提货人信息","e":"Consignee Information","c":"物流运输","t":"phrase"},{"z":"以防迟到。我就提前过来了。","e":"I came early to avoid being late.","c":"综合表达","t":"sentence"},{"z":"我们的机器人在上个月底就准备好发货了，但是因为最近中国到欧洲的船期很紧张，很难预定，舱位是预定的下周，下周有了运单号后我会发给你。","e":"Our robots were ready for shipment by the end of last month. However, due to the tight shipping schedules from China to Europe recently, it has been difficult to secure a booking. The container space has been reserved for next week. Once we have the tracking number, I will send it to you.","c":"物流运输","t":"paragraph"},{"z":"反光条","e":"Reflective strip","c":"综合表达","t":"phrase"},{"z":"我们需要大量的原材料。","e":"We need a large quantity of raw materials.","c":"综合表达","t":"sentence"},{"z":"我们以高质量标准而闻名。","e":"We are known for our high quality standards.","c":"综合表达","t":"sentence"},{"z":"在600kg车型上提供选装的旋转功能。","e":"The swivel function is available as an option on the 600kg model.","c":"会议日程","t":"sentence"},{"z":"抱歉，让我们回到原来的日程，明天见。","e":"Sorry, let's get back to the original schedule. See you tomorrow.","c":"项目管理","t":"sentence"},{"z":"货运代理","e":"Freight forwarder","c":"物流运输","t":"phrase"},{"z":"这种模式会增加我们得到这个项目的可能性吗？","e":"Does this approach enhance the likelihood of us securing the project?","c":"项目管理","t":"sentence"},{"z":"如果你们可以给客户提供这种选择，我们没有意见。","e":"Will this approach improve our odds of getting the project?","c":"项目管理","t":"sentence"},{"z":"我和我的领导简短电话沟通了一下，为了表示对你们的支持，我们可以这样操作，你可以选择一款合适的机器人，我们往下推进。","e":"My leader and I had a brief phone conversation. To show our support for you, we can proceed this way: you may choose a suitable robot, and we'll move forward with it.","c":"物流运输","t":"paragraph"},{"z":"我和我的领导简短电话沟通了一下，为了表示对你们的支持，我们可以按你说的这样操作，你可以选择一款合适的机器人，我们往下推进。","e":"My leader and I had a brief phone call. To show our support for your team, we can proceed as you suggested: you may choose a suitable robot, and we'll move forward accordingly.","c":"物流运输","t":"paragraph"},{"z":"我周一有安排了，但是我和同事商量后，我把另外的安排取消了。我们还是按原计划9号早上开会吧。","e":"I already had something scheduled for Monday, but after discussing with my colleague, I’ve rearranged my other plans.","c":"项目管理","t":"sentence"},{"z":"我公司在9号有临时安排其他的事情，我不得不请求改变我们的会议时间从9号早上8-9点改成10号早上8-9点，不知道你们是否方便？","e":"Due to an unexpected schedule conflict on the 9th, I would like to request rescheduling our meeting from 8–9 AM on the 9th to 8–9 AM on the 10th. Would that be convenient for you?","c":"项目管理","t":"paragraph"},{"z":"如果收货地址和公司地址不同，请同时提供收货地址。","e":"If the delivery address is different from the company address, please provide the delivery address as well.","c":"物流运输","t":"sentence"},{"z":"因为在中国做一次CE认证很贵，所以我们就做大一点，向下兼容。","e":"Since obtaining a CE certification in China is quite expensive, we decided to go for a larger-scale approach with downward compatibility.","c":"综合表达","t":"sentence"},{"z":"因为我们的文档和邮件是在同一个系统里，我复制的链接会被邮件系统自动处理。我现在把链接放到了一个日程的链接里，你看看能否打开。日程仅仅是为了发送链接。再次抱歉。","e":"Because our documents and emails are within the same system, the links I copy are automatically processed by the email system. I’ve now placed the link inside a calendar event—could you check if it opens? The calendar event is only used to share the link. Apologies again.","c":"会议日程","t":"paragraph"},{"z":"我抄送了我的同事，他会负责后面的所有事情。是让他联系你还是联系谁来对接取货的事情？","e":"I've CC'd my colleague, and he will take care of everything from here. Should he contact you or someone else to coordinate the pickup?","c":"物流运输","t":"sentence"},{"z":"我可能迟到一会，具体时间我会再更新。","e":"I might be a little late; I'll update you with the exact time later.","c":"会议日程","t":"sentence"},{"z":"那几份叉车的单页有点问题，因为是从展会回来的，每一个单页上都有我们钉的名片。没有全新的了，这个单页你们自己后续打印一下吧。","e":"There are some issues with those forklift flyers - they were brought back from the exhibition, and each one has our business card stapled to it. We don't have any brand new ones left, so you'll need to print these flyers yourself later.","c":"技术产品","t":"paragraph"},{"z":"财务同事","e":"Financial colleague","c":"综合表达","t":"phrase"},{"z":"毛重","e":"Gross weight","c":"综合表达","t":"phrase"},{"z":"他明天开始休假，休两周。","e":"He will start his vacation tomorrow and take two weeks off.","c":"综合表达","t":"sentence"},{"z":"南欧区域经理","e":"Southern Europe Regional Manager","c":"付款财务","t":"phrase"},{"z":"这个价格对你来说是否有竞争力？","e":"Is this price competitive for you?","c":"付款财务","t":"phrase"},{"z":"有第一排或者安全出口座椅吗？","e":"Is there a seat in the first row or by the emergency exit?","c":"综合表达","t":"sentence"},{"z":"我想说，我从没想像现在这样那么想说流利的西班牙语。","e":"I've never wanted to speak fluent Spanish as much as I do now.","c":"日常表达","t":"sentence"},{"z":"我清楚的问过他，关于他和各地工厂谁负责决定从哪里采购。他说他负责设计和验证能用于全球工厂的技术应用，一旦验证完后，统一由中国采购，在他们的中国工厂进行组装调试，然后发往全球。至于各自工厂自己的特殊需求，可能会由工厂在当地找供应商。","e":"I clearly asked him about who is responsible for deciding procurement sources between him and the local factories. He said he is in charge of designing and validating technological applications that can be used by global factories. Once validated, procurement is uniformly handled by China, where the components are assembled and debugged at their Chinese factory before being shipped worldwide. As for specific needs unique to individual factories, they might source suppliers locally.","c":"物流运输","t":"paragraph"},{"z":"我在门口，你能出来接我吗？","e":"I'm at the door, can you come out to meet me?","c":"综合表达","t":"sentence"},{"z":"希望你生意兴隆。","e":"I wish you a thriving business.","c":"邮件社交","t":"phrase"},{"z":"合同处理完后，我会申请提前发货，审批通过后，我们就可以激活一台。","e":"After the contract is processed, I will apply for early shipment. Once approved, we can activate one unit.","c":"物流运输","t":"sentence"},{"z":"抱歉我在展会，所以回复比较慢。","e":"I'm sorry for the slow response as I'm currently at the trade show.","c":"邮件社交","t":"sentence"},{"z":"这个产品已经下市了。","e":"This product has been discontinued.","c":"综合表达","t":"phrase"},{"z":"我们公司的底线是发货前必须收到全款。","e":"The bottom line for our company is that full payment must be received before shipment.","c":"物流运输","t":"sentence"},{"z":"好的没问题，我只是想，如果你们觉得方案不合适，我们可以探讨其他的方案，这不是我们的标准产品策略，只是我觉得可行的方案，所以把他提出来了。因为长时间没有回复，我猜可能你们对方案不是很满意，所以我问一下。","e":"No problem at all. I just thought that if you find the proposal unsuitable, we could explore alternative solutions. This isn't part of our standard product strategy - it's just a feasible approach I wanted to suggest. Since I haven't heard back for a while, I guessed you might not be completely satisfied with it, so I thought I'd check in.","c":"会议日程","t":"paragraph"},{"z":"我知道这个价格会很贵，我们没有其他办法，如果你能接受这个价格，我们可以讨论下一步的合作。","e":"I understand this price is quite high, but we have no alternative. If you can accept it, we can discuss the next steps for collaboration.","c":"付款财务","t":"sentence"},{"z":"非常希望你们能成为我们的集成商，一起开拓欧洲市场。","e":"We sincerely hope you can become our integrator and jointly explore the European market together.","c":"付款财务","t":"sentence"},{"z":"我们非常欢迎你们来我们公司，不过在这段时间，我在欧洲，但是我会让我们同事接待您。","e":"We warmly welcome you to visit our company. However, during this period, I will be in Europe, but I will arrange for my colleagues to assist you.","c":"付款财务","t":"sentence"},{"z":"我正在安排我6月的行程。","e":"I'm arranging my schedule for June.","c":"项目管理","t":"phrase"},{"z":"这个现场条件确实很苛刻，各种限制互相制约。","e":"The field conditions here are extremely challenging, as various limitations are mutually restrictive.","c":"项目管理","t":"sentence"},{"z":"驱动方式是普通的差速驱动，不是全向驱动。","e":"The drive method is standard differential drive, not omni-directional drive.","c":"综合表达","t":"sentence"}];
+const CATS = [...new Set(LIB.map(x=>x.c))];
+
+/* ======= STATE ======= */
+let progress = JSON.parse(localStorage.getItem('eng7_progress')||'{}');
+let libState = {cat:'', q:'', shown:0};
+let quizState = JSON.parse(localStorage.getItem('eng7_quiz')||'{"known":{},"unknown":{},"total":0}');
+let quizCurrent = null, quizRevealed = false;
+
+/* ======= SHARED ======= */
+function speak(text){
+  if(!window.speechSynthesis){alert('您的浏览器不支持语音朗读');return;}
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US';u.rate=0.85;
+  window.speechSynthesis.speak(u);
+}
+function esc(s){return s.replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+function flip(el){el.classList.toggle('flipped');}
+
+/* ======= MODE SWITCH ======= */
+function switchMode(i,el){
+  document.querySelectorAll('.mode').forEach((m,j)=>m.classList.toggle('active',i===j));
+  document.querySelectorAll('.mode-tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  window.scrollTo({top:0});
+  if(i===1&&libState.shown===0)renderLib(true);
+  if(i===2&&!quizCurrent)nextQuiz();
+}
+
+/* ======= MODE 1: 7-DAY ======= */
+function initCourse(){
+  const tabs=document.getElementById('dayTabs');
+  tabs.innerHTML=COURSE.map((d,i)=>{
+    const done=progress[i]&&progress[i].completed;
+    return `<div class="day-tab ${i===0?'active':''} ${done?'done':''}" onclick="selDay(${i})"><div class="num">${d.day}</div><div class="label">${d.titleZh.slice(0,2)}</div></div>`;
+  }).join('');
+  const cont=document.getElementById('dayContents');
+  cont.innerHTML=COURSE.map((d,i)=>{
+    const done=progress[i]&&progress[i].completed;
+    return `<div class="dayc ${i===0?'active':''}" id="day-${i}">
+    <div class="day-header"><h2>Day ${d.day}: ${d.title}</h2><p>${d.titleZh} · ${d.desc}</p></div>
+    <div class="st"><div class="ic ic-v">V</div>核心词汇<span class="cnt">${d.vocab.length} 词</span></div>
+    ${d.vocab.map(v=>`<div class="fc" onclick="flip(this)"><div class="fc-in">
+      <div class="fc-f"><div class="fc-en">${v.en}</div><div class="fc-zh">${v.zh}</div><span class="fc-tag">${v.tag}</span>
+      <button class="spk" onclick="event.stopPropagation();speak('${esc(v.en)}')">&#128266;</button></div>
+      <div class="fc-b"><div class="fc-en">${v.en}</div><div class="fc-zh">${v.zh}</div><div class="fc-ex">"${v.example}"</div>
+      <button class="spk" onclick="event.stopPropagation();speak('${esc(v.example)}')">&#128266;</button></div>
+    </div></div>`).join('')}
+    <div class="hint">点击卡片翻面查看例句，点击喇叭朗读</div>
+    <div class="st"><div class="ic ic-p">S</div>重点句式<span class="cnt">${d.patterns.length} 句</span></div>
+    ${d.patterns.map(p=>`<div class="pc"><div class="pc-en">${p.en}</div><div class="pc-zh">${p.zh}</div>
+      <div class="pc-note">&#128161; ${p.note}</div>
+      <div class="pc-act"><button onclick="speak('${esc(p.en)}')">&#128266; 朗读</button></div></div>`).join('')}
+    <div class="st"><div class="ic ic-x">P</div>互动练习</div>
+    ${renderPractice(d.practice,i)}
+    <div class="done-sec"><button class="done-btn ${done?'done':''}" onclick="toggleDone(${i})">${done?'✓ 今日已完成':'标记今日完成'}</button>
+    <div class="done-msg">${done?'太棒了！继续下一天吧':''}</div></div>
+    </div>`;
+  }).join('');
+}
+function selDay(i){
+  document.querySelectorAll('.dayc').forEach((el,j)=>el.classList.toggle('active',i===j));
+  document.querySelectorAll('.day-tab').forEach((el,j)=>el.classList.toggle('active',i===j));
+  window.scrollTo({top:0});
+  document.querySelectorAll('.day-tab')[i].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+function renderPractice(p,di){
+  if(p.type==='fill'){
+    return `<div class="qc"><div class="qc-q">填空：${p.q.replace('___',`<span class="bl">${p.blank1}</span>`).replace('___',`<span class="bl">${p.blank2}</span>`)}</div>
+    <div class="qc-opts">${p.options.map((o,i)=>`<div class="qc-opt" onclick="chk(this,${i},${p.answer},'${esc(p.explain)}',${di})"><div class="ol2">${String.fromCharCode(65+i)}</div><span>${o}</span></div>`).join('')}</div>
+    <div class="qc-fb" id="fb-${di}"></div></div>`;
+  }
+  if(p.type==='match'){
+    const sh=[...p.pairs].sort(()=>Math.random()-.5);
+    return `<div class="qc"><div class="qc-q">连线匹配：英文 ↔ 中文</div>
+    <div class="mg" id="mg-${di}">
+    ${p.pairs.map((pr,i)=>`<div class="mi" data-t="e" data-p="${i}" onclick="mSel(this,${di})">${pr.en}</div>`).join('')}
+    ${sh.map(pr=>{const oi=p.pairs.indexOf(pr);return `<div class="mi" data-t="z" data-p="${oi}" onclick="mSel(this,${di})">${pr.zh}</div>`;}).join('')}
+    </div><div class="qc-fb" id="fb-${di}"></div></div>`;
+  }
+  return '';
+}
+function chk(el,sel,ans,ex,di){
+  const opts=el.parentElement.querySelectorAll('.qc-opt');
+  opts.forEach(o=>o.style.pointerEvents='none');
+  const fb=document.getElementById(`fb-${di}`);
+  if(sel===ans){el.classList.add('ok');fb.className='qc-fb fb-ok show';fb.innerHTML='✓ 正确！'+ex;}
+  else{el.classList.add('no');opts[ans].classList.add('ok');fb.className='qc-fb fb-no show';fb.innerHTML='✗ 正确答案 '+String.fromCharCode(65+ans)+'。'+ex;}
+}
+let mState={};
+function mSel(el,di){
+  if(!mState[di])mState[di]={sel:null,done:0,total:0};
+  const st=mState[di],grid=document.getElementById(`mg-${di}`);
+  st.total=grid.querySelectorAll('[data-t="e"]').length;
+  if(el.classList.contains('done'))return;
+  if(el.classList.contains('sel')){el.classList.remove('sel');st.sel=null;return;}
+  if(!st.sel){el.classList.add('sel');st.sel=el;return;}
+  if(st.sel.dataset.t===el.dataset.t){st.sel.classList.remove('sel');el.classList.add('sel');st.sel=el;return;}
+  if(st.sel.dataset.p===el.dataset.p){
+    st.sel.classList.add('done');st.sel.classList.remove('sel');el.classList.add('done');
+    st.done++;st.sel=null;
+    if(st.done===st.total){const fb=document.getElementById(`fb-${di}`);fb.className='qc-fb fb-ok show';fb.innerHTML='✓ 全部配对成功！';}
+  }else{
+    const a=st.sel,b=el;a.classList.add('bad');b.classList.add('bad');
+    setTimeout(()=>{a.classList.remove('bad','sel');b.classList.remove('bad');},400);
+    st.sel=null;
+  }
+}
+function toggleDone(i){
+  if(!progress[i])progress[i]={};
+  progress[i].completed=!progress[i].completed;
+  localStorage.setItem('eng7_progress',JSON.stringify(progress));
+  initCourse();
+  document.querySelectorAll('.dayc').forEach((el,j)=>el.classList.toggle('active',i===j));
+  document.querySelectorAll('.day-tab').forEach((el,j)=>el.classList.toggle('active',i===j));
+}
+
+/* ======= MODE 2: LIBRARY ======= */
+const BATCH=40;
+function initLibChips(){
+  document.getElementById('libChips').innerHTML=
+    `<div class="chip active" data-c="" onclick="setCat('',this)">全部 (${LIB.length})</div>`+
+    CATS.map(c=>`<div class="chip" data-c="${c}" onclick="setCat('${c}',this)">${c} (${LIB.filter(x=>x.c===c).length})</div>`).join('');
+}
+function setCat(c,el){
+  libState.cat=c;
+  document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('active',x.dataset.c===c));
+  renderLib(true);
+}
+function libFiltered(){
+  let r=LIB;
+  if(libState.cat)r=r.filter(x=>x.c===libState.cat);
+  if(libState.q){const q=libState.q.toLowerCase();r=r.filter(x=>x.z.toLowerCase().includes(q)||x.e.toLowerCase().includes(q));}
+  return r;
+}
+function renderLib(reset){
+  libState.q=document.getElementById('libSearch').value.trim();
+  if(reset)libState.shown=0;
+  const all=libFiltered();
+  const list=document.getElementById('libList');
+  if(reset)list.innerHTML='';
+  const batch=all.slice(libState.shown,libState.shown+BATCH);
+  list.innerHTML+=batch.map(x=>`<div class="lc" onclick="flip(this)"><div class="lc-in">
+    <div class="lc-f"><span class="lc-cat">${x.c}</span><div class="lc-zh">${x.z}</div></div>
+    <div class="lc-b"><div class="lc-en">${x.e}</div>
+    <button class="spk" style="background:rgba(255,255,255,.2);color:#fff" onclick="event.stopPropagation();speak('${esc(x.e)}')">&#128266;</button></div>
+  </div></div>`).join('');
+  libState.shown+=batch.length;
+  document.getElementById('libCount').textContent=`共 ${all.length} 条 · 已显示 ${Math.min(libState.shown,all.length)} 条 · 点击卡片看英文`;
+  document.getElementById('loadMore').style.display=libState.shown<all.length?'block':'none';
+  if(all.length===0)list.innerHTML='<div class="no-result">没有匹配的内容，换个关键词试试</div>';
+}
+function loadMore(){renderLib(false);}
+
+/* ======= MODE 3: QUIZ ======= */
+function initQuizCats(){
+  document.getElementById('quizCat').innerHTML='<option value="">全部主题随机</option>'+
+    CATS.map(c=>`<option value="${c}">${c}</option>`).join('');
+  updateQuizStats();
+}
+function pickQuiz(){
+  const cat=document.getElementById('quizCat').value;
+  let pool=cat?LIB.filter(x=>x.c===cat):LIB;
+  // weight: unknown=3, unseen=1, known=0.2
+  const weighted=[];
+  pool.forEach(x=>{
+    const k=x.e.slice(0,60);
+    let w=1;
+    if(quizState.unknown[k])w=3;
+    else if(quizState.known[k])w=0.2;
+    weighted.push({x,w});
+  });
+  const total=weighted.reduce((s,a)=>s+a.w,0);
+  let r=Math.random()*total;
+  for(const a of weighted){r-=a.w;if(r<=0)return a.x;}
+  return weighted[weighted.length-1].x;
+}
+function nextQuiz(){
+  quizCurrent=pickQuiz();quizRevealed=false;
+  document.getElementById('quizFront').textContent=quizCurrent.z;
+  document.getElementById('quizFront').style.display='block';
+  document.getElementById('quizBack').style.display='none';
+  document.getElementById('quizCatLabel').textContent=quizCurrent.c;
+  document.getElementById('quizAudio').style.display='none';
+  document.getElementById('quizTap').textContent='看中文 → 想英文 → 点击翻面';
+  document.getElementById('qbNo').classList.remove('show');
+  document.getElementById('qbOk').classList.remove('show');
+}
+function revealQuiz(){
+  if(quizRevealed)return;
+  quizRevealed=true;
+  document.getElementById('quizFront').style.display='none';
+  const back=document.getElementById('quizBack');
+  back.textContent=quizCurrent.e;back.style.display='block';
+  document.getElementById('quizAudio').style.display='flex';
+  document.getElementById('quizTap').textContent='点喇叭听发音，然后自我评估';
+  document.getElementById('qbNo').classList.add('show');
+  document.getElementById('qbOk').classList.add('show');
+}
+function markQuiz(known){
+  const k=quizCurrent.e.slice(0,60);
+  quizState.total++;
+  if(known){quizState.known[k]=1;delete quizState.unknown[k];}
+  else{quizState.unknown[k]=1;delete quizState.known[k];}
+  localStorage.setItem('eng7_quiz',JSON.stringify(quizState));
+  updateQuizStats();
+  nextQuiz();
+}
+function updateQuizStats(){
+  document.getElementById('qsTotal').textContent=quizState.total;
+  document.getElementById('qsKnown').textContent=Object.keys(quizState.known).length;
+  document.getElementById('qsUnknown').textContent=Object.keys(quizState.unknown).length;
+}
+
+/* ======= INIT ======= */
+initCourse();
+initLibChips();
+initQuizCats();
+</script>
+</body>
+</html>
